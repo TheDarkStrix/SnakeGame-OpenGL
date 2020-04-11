@@ -21,8 +21,13 @@ void createGrid(){
 }
 
 void cells(int x,int y){
+    if(x==0 || y==0 || x==gridX-1 || y==gridY-1){
+        glLineWidth(3.0);
+        glColor3f(0.5,0.5,1.0);
+    }else{
     glLineWidth(1.0);
     glColor3f(1.0,1.0,1.0);
+    }
     glBegin(GL_LINE_LOOP);
     glVertex2f(x,y);
     glVertex2f(x+1,y);
