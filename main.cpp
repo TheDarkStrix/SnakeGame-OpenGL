@@ -1,3 +1,6 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "snakeGame.h"
@@ -8,6 +11,8 @@
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 extern short direction ;
+bool gameOver = false;
+
 void display(){
     glClear(GL_COLOR_BUFFER_BIT);
     //Calls create grids from SnakeGame.c
@@ -15,7 +20,11 @@ void display(){
     //height of each cell
     createGrid();
     createSnake();
+    createFood();
     glutSwapBuffers();
+    if(gameOver){
+    exit(0);
+    }
 }
 
 void reshape(int width , int height){
