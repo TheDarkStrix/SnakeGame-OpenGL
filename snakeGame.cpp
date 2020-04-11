@@ -3,7 +3,8 @@
 #include "snakeGame.h"
 
 int gridX,gridY;
-
+short direction = RIGHT;
+int positionX=20,positionY=20;
 void Grid(int x,int y){
     gridX=x;
     gridY=y;
@@ -34,4 +35,16 @@ void cells(int x,int y){
     glVertex2f(x+1,y+1);
     glVertex2f(x,y+1);
     glEnd();
+}
+
+void createSnake(){
+    if(direction==UP)
+    positionY++;
+    else if(direction==DOWN)
+    positionY--;
+    else if(direction==RIGHT)
+    positionX++;
+    else if(direction==LEFT)
+    positionX--;
+    glRectd(positionX,positionY,positionX+1,positionY+1);
 }

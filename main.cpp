@@ -7,20 +7,14 @@
 #define FPS 10
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
-int index=0;
-
+extern short direction ;
 void display(){
     glClear(GL_COLOR_BUFFER_BIT);
     //Calls create grids from SnakeGame.c
     //More number of ROW and COL decides the width and 
     //height of each cell
     createGrid();
-    glRectd(index,20,index+2,22);
-    index++;
-    //this is just for testing
-    if(index>40){
-        index=0;
-    }
+    createSnake();
     glutSwapBuffers();
 }
 
@@ -40,6 +34,27 @@ glutPostRedisplay();
 glutTimerFunc(1000/FPS,timer,0);
 }
 
+void keyboardControls(int keyboardcontrol,int,int){
+    switch(keyboardcontrol){
+        case GLUT_KEY_UP:
+        if(direction!=DOWN)
+        direction=UP;
+        break;
+        case GLUT_KEY_DOWN:
+        if(direction!=UP)
+        direction=DOWN;
+        break;
+        case GLUT_KEY_RIGHT:
+        if(direction!=LEFT)
+        direction=RIGHT;
+        break;
+        case GLUT_KEY_LEFT:
+        if(direction!=RIGHT)
+        direction=LEFT;
+        break;
+    }
+}
+
 void init(){
 //Black is the default color background in glut, this function can be ignored also
 glClearColor(0.0,0.0,0.0,1.0);
@@ -54,6 +69,7 @@ int main(int argc, char** argv) {
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutTimerFunc(0,timer,0);
+    glutSpecialFunc(keyboardControls);
     init();
     glutMainLoop();
 	return 0;
